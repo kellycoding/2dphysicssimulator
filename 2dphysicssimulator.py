@@ -4,15 +4,16 @@ from pygame.locals import *
 # Global variables
 clock = pygame.time.Clock()
 display = pygame.display
+scale = pygame.transform.scale
 
 # Initialization
 class App:
     def __init__(self):
         self._running = True
-        self.size = self.width, self.height = 640, 400
-        self._display = display.set_mode(self.size)
+        self._size = self.width, self.height = 640, 400
+        self._display = display.set_mode(self._size)
         self.fpsLimit = 60
-        self._backdrop = pygame.image.load('2824536.jpg')
+        self._backdrop = scale(pygame.image.load('2824536.jpg'), self._size)
 
     def exitGame(self):
         pygame.quit()
