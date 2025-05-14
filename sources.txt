@@ -1,0 +1,5 @@
+https://www.pygame.org/docs/ref/time.html
+
+http://pygametutorials.wikidot.com/tutorials-basic
+
+https://www.youtube.com/watch?v=7AKatTpNSNQ&list=PLE3D1A71BB598FEF6&ab_channel=MarekBelski
