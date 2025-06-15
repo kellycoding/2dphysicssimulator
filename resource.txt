@@ -3,3 +3,15 @@ https://www.pygame.org/docs/ref/time.html
 http://pygametutorials.wikidot.com/tutorials-basic
 
 https://www.youtube.com/watch?v=7AKatTpNSNQ&list=PLE3D1A71BB598FEF6&ab_channel=MarekBelski
+
+https://www.youtube.com/watch?v=dGwmmBBMlKs&ab_channel=buildwithpython
+
+https://github.com/search?q=pygame.sprite.Sprite.add+language%3APython&type=Code&l=Python
+
+https://stackoverflow.com/questions/16044229/how-to-get-keyboard-input-in-pygame
+
+https://stackoverflow.com/questions/27770602/pygame-rect-what-are-the-arguments
+
+https://www.ibm.com/docs/en/spss-modeler/18.6.0?topic=programming-defining-class-attributes-methods
+
+https://stackoverflow.com/questions/16044229/how-to-get-keyboard-input-in-pygame
