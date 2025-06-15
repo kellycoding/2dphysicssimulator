@@ -5,7 +5,8 @@ A customizable playground with a fully functioning kinematics engine. Players ca
 To play: Simply run main.py in python. massspectrometer.py is a broken, mid-crashout side project.
 
 ## Requirements
+
+Pygame: Library used by the game.
 ```
 python3 -m pip install -U pygame --user
-pip install numpy
 ```
