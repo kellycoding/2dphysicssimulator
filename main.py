@@ -79,7 +79,7 @@ class Ball:
     def gravity(self, g):
         self.g = g
         self.addForce(0, self.mass*g)
-        write(f"Gravity: {self.g/10}m/s^2", (5,40))
+        write(f"Gravity: {round(self.g/10, 2)}m/s^2", (5,40))
     
     def normalForce(self):
         self.addForce(0, -self.Fnety)
@@ -145,6 +145,28 @@ class Button:
                     ball.vy = 0
                     ball.Fnetx = 0
                     ball.Fnety = 0
+                
+                if self.action == "CHANGE MASS" and not self.pressed:
+                    ball.x = 200
+                    ball.y = 100
+                    ball.vx = 0
+                    ball.vy = 0
+                    ball.Fnetx = 0
+                    ball.Fnety = 0
+                    self.pressed = True
+
+                    if ball.mass == 0.1:
+                        ball.mass = 0.25
+                        self.text = "250g"
+                    elif ball.mass == 0.25:
+                        ball.mass = 0.5
+                        self.text = "500g"
+                    elif ball.mass == 0.5:
+                        ball.mass = 1
+                        self.text = "1000g"
+                    elif ball.mass == 1:
+                        ball.mass = 0.1
+                        self.text = "100g"
 
                 if self.action == "CHANGE PLANET" and not self.pressed:
                     ball.x = 200
@@ -154,6 +176,7 @@ class Button:
                     ball.Fnetx = 0
                     ball.Fnety = 0
                     self.pressed = True
+
                     global planet
                     if planet == "Earth":
                         planet = "Mars"
@@ -177,6 +200,7 @@ class Button:
 
 reset = Button(500, 300, 60, 30, red, "Reset", "RESET")
 changePlanet = Button(500, 350, 60, 30, green, "Earth", "CHANGE PLANET")
+changeMass = Button(400, 300, 60, 30, blue, "500g", "CHANGE MASS")
 
 # Game loop
 
@@ -245,6 +269,9 @@ while running:
 
     changePlanet.display()
     changePlanet.checkPress()
+
+    changeMass.display()
+    changeMass.checkPress()
     
     pygame.display.flip()
 
