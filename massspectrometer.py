@@ -15,6 +15,15 @@ screen = pygame.display.set_mode(screenSize)
 clock = pygame.time.Clock()
 pygame.display.set_caption('Mass Spectrometer')
 
+# Text
+
+global font
+pygame.font.init()
+font = pygame.font.SysFont('arial',20)
+
+def write(text, location, color=black):
+    screen.blit(font.render(text, True, color), location)
+
 # Classes
 
 class Particle:
@@ -25,20 +34,24 @@ class Particle:
         self.color = color
         self.width = 1
         self.velocity = velocity
-        self.vx = velocity * numpy.cos(direction)
-        self.vy = velocity * numpy.sin(direction)
-        self.mass = 0.1
+        self.direction = direction
+        self.vx = velocity * numpy.cos(self.direction)
+        self.vy = velocity * numpy.sin(self.direction)
+        self.mass = 0.911
         self.Fnetx = 0
         self.Fnety = 0
         self.charge = charge
-        self.stick = False
     
     def display(self):
         pygame.draw.circle(screen, self.color, (self.x, self.y), self.size, self.width)
+        write(f"Velocity: {int(self.velocity)}", (5,0))
+        write(f"Direction: {self.direction}", (5,20))
+        write(f"Charge: {self.charge*10}C", (5,40))
     
     def move(self):
         self.x += self.vx/fpsLimit
         self.y += self.vy/fpsLimit
+        self.direction = numpy.arctan(self.vy/self.vx)
     
     def changeVelocity(self, magnitude, direction):
         self.vx += magnitude * numpy.cos(direction)
@@ -53,7 +66,11 @@ class Particle:
     def magneticForce(self, direction, field):
         self.Fnety = self.charge * self.velocity * field
         self.updateVelocity(direction)
+        write(f"Magnetic force: {int(self.charge * self.velocity * field)}N", (5,80))
     
+    def centripetalForce(self, clockwise=True):
+        if clockwise:
+            self.updateVelocity(self.direction + 20)
     
     def collide(self, color):
         try:
@@ -87,10 +104,11 @@ class Plate:
     def display(self):
         pygame.draw.rect(screen, self.color, (self.x, self.y, self.x+self.l, self.y+10))
         pygame.draw.rect(screen, self.color, (self.x, self.y+100, self.x+self.l, self.y+10))
+        write(f"Magnetic field: {self.field}T", (5,60))
 
 e = 1.602 * (10 ** -2)
-particle = Particle(300, 100, 10, red, e)
-plates = Plate(100, 20, 100, black, 5)
+particle = Particle(100, 90, 10, red, e)
+plates = Plate(150, 20, 60, black, 5)
 
 # Game loop
 
@@ -141,8 +159,10 @@ while running:
     particle.bounce()
 
     # Check if between plates
-    if plates.x <= particle.x <= plates.x + plates.l:# and plates.y <= particle.y <= plates.y + 100:
-        particle.magneticForce(270, plates.field)
+    if plates.x <= particle.x <= plates.x + plates.l and plates.y <= particle.y <= plates.y + 100:
+        particle.magneticForce(3.14, plates.field)
+    elif particle.x > plates.x:
+        particle.centripetalForce()
     
     pygame.display.flip()
 
