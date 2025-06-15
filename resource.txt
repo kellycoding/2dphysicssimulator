@@ -19,3 +19,7 @@ https://stackoverflow.com/questions/16044229/how-to-get-keyboard-input-in-pygame
 https://www.w3schools.com/python/numpy/numpy_ufunc.asp
 
 https://www.reddit.com/r/pygame/comments/wec5zw/how_do_i_detect_when_my_player_is_touching_the/
+
+https://www.geeksforgeeks.org/python/how-to-create-buttons-in-a-game-using-pygame/
+
+https://stackoverflow.com/questions/36227099/how-can-i-add-a-delay-to-a-mouse-click-in-pygame
